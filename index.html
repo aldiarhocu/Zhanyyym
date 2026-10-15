@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sabina's World ✨</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0a0a0c',
+              card: '#121218',
+              border: 'rgba(255, 42, 133, 0.15)',
+              pink: '#ff2a85',
+              purple: '#d946ef',
+              glow: 'rgba(255, 42, 133, 0.3)'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #0a0a0c;
+      color: #f3f4f6;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Pink & Magenta Glow Backgrounds */
+    .glow-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 42, 133, 0.18) 0%, rgba(217, 70, 239, 0.05) 50%, rgba(0, 0, 0, 0) 70%);
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glassmorphic Cards */
+    .glass-card {
+      background: rgba(18, 18, 24, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 42, 133, 0.12);
+    }
+
+    .glass-card-hover {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card-hover:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 42, 133, 0.4);
+      box-shadow: 0 12px 35px -10px rgba(255, 42, 133, 0.3);
+    }
+
+    /* Equalizer Sound Waves */
+    .eq-bar {
+      width: 3px;
+      height: 6px;
+      background-color: #ff2a85;
+      border-radius: 2px;
+      margin: 0 1.5px;
+      transition: height 0.15s ease;
+    }
+
+    .playing .eq-bar {
+      animation: eqAnimation 1.2s infinite ease-in-out alternate;
+    }
+
+    .playing .eq-bar:nth-child(1) { animation-duration: 0.5s; }
+    .playing .eq-bar:nth-child(2) { animation-duration: 0.8s; }
+    .playing .eq-bar:nth-child(3) { animation-duration: 1.1s; }
+    .playing .eq-bar:nth-child(4) { animation-duration: 0.7s; }
+    .playing .eq-bar:nth-child(5) { animation-duration: 1.0s; }
+
+    @keyframes eqAnimation {
+      0% { height: 4px; opacity: 0.3; }
+      100% { height: 22px; opacity: 1; }
+    }
+
+    /* Click Particle Sparkles */
+    .click-sparkle {
+      position: fixed;
+      pointer-events: none;
+      animation: floatSparkle 1s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes floatSparkle {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -90px) scale(1.4) rotate(45deg);
+      }
+    }
+
+    /* Glowing Text Effect */
+    .pink-glow-text {
+      text-shadow: 0 0 20px rgba(255, 42, 133, 0.6);
+    }
+
+    /* Custom Input Range */
+    input[type="range"]::-webkit-slider-thumb {
+      background: #ff2a85;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0a0c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e1e28;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff2a85;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between selection:bg-pink-500 selection:text-white">
+
+  <!-- Background Glowing Orbs -->
+  <div class="glow-effect w-[600px] h-[600px] -top-40 -left-40"></div>
+  <div class="glow-effect w-[700px] h-[700px] top-[35%] -right-48"></div>
+  <div class="glow-effect w-[500px] h-[500px] bottom-10 left-[20%]"></div>
+
+  <!-- MAIN CONTAINER -->
+  <div class="relative z-10 max-w-5xl mx-auto px-4 py-10 sm:px-6 lg:px-8 space-y-16">
+
+    <!-- HERO HEADER: CONCEPTUAL CONCEPT BOARD -->
+    <header class="text-center space-y-6 pt-6">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-pink-500/30 text-pink-400 text-xs sm:text-sm font-semibold tracking-wider uppercase shadow-lg">
+        <i class="fa-solid fa-sparkles text-pink-400 animate-pulse"></i>
+        <span>Aesthetic Association Board</span>
+      </div>
+
+      <h1 class="text-6xl sm:text-8xl font-black tracking-tight">
+        SABINA'S <span class="bg-gradient-to-r from-pink-500 via-fuchsia-400 to-rose-500 bg-clip-text text-transparent font-serif italic pink-glow-text">WORLD</span>
+      </h1>
+
+      <p class="text-gray-400 max-w-md mx-auto text-sm sm:text-base leading-relaxed font-light tracking-wide">
+        Все, что ассоциируется с ней: эстетика, любимая музыка, розовый Burberry Her и ночной вайб.
+      </p>
+
+      <!-- RANDOM VIBE GENERATOR BUTTON -->
+      <div class="pt-2">
+        <button onclick="generateVibe()" class="group relative inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-600 to-fuchsia-600 text-white font-semibold text-sm shadow-xl shadow-pink-600/20 hover:shadow-pink-600/40 hover:scale-105 transition-all active:scale-95">
+          <i class="fa-solid fa-wand-magic-sparkles text-pink-200 group-hover:rotate-12 transition-transform"></i>
+          <span id="vibe-btn-text">Сгенерировать вайб Сабины</span>
+        </button>
+        <!-- Vibe Display Box -->
+        <div id="vibe-quote-box" class="mt-4 min-h-[48px] flex items-center justify-center">
+          <p id="vibe-quote" class="text-sm italic text-pink-300 font-serif tracking-wide opacity-0 transition-opacity duration-500">
+            «Late night drives, Drake on repeat & Burberry Her trail ✨»
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: VISUAL ASSOCIATIONS (VIBE BOARD) -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between border-b border-white/5 pb-4">
+        <div>
+          <span class="text-xs font-semibold tracking-widest uppercase text-pink-400">Concept Grid</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-0.5">Vibe Board & Ассоциации</h2>
+        </div>
+        <i class="fa-solid fa-border-all text-pink-500/50 text-xl"></i>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- CARD 1: BURBERRY HER PERFUME (PINK) -->
+        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden group flex flex-col justify-between md:col-span-1">
+          <div class="absolute -right-8 -top-8 w-32 h-32 bg-pink-500/10 rounded-full blur-2xl group-hover:bg-pink-500/25 transition-all"></div>
+          
+          <div class="space-y-2 relative z-10">
+            <span class="text-[10px] uppercase font-bold tracking-widest text-pink-400 bg-pink-500/10 px-2.5 py-1 rounded-md border border-pink-500/20">Her Fragrance</span>
+            <h3 class="text-xl font-bold text-white">Burberry Pink</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Нежный, сладкий и эстетичный шлейф Burberry Her Elixir.</p>
+          </div>
+
+          <!-- Perfume Image -->
+          <div class="my-6 relative flex justify-center items-center h-52">
+            <div class="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
+            <img 
+              src="https://assets.burberry.com/is/image/Burberryltd/79BE0E1B-4467-4659-96D0-ECECE8356792?$BBY_V3_SL_1$&wid=1501&hei=1500" 
+              alt="Burberry Her Pink Perfume" 
+              class="max-h-48 object-contain drop-shadow-[0_10px_20px_rgba(255,42,133,0.3)] group-hover:scale-110 transition-transform duration-500 relative z-10"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80';"
+            >
+          </div>
+
+          <div class="text-[11px] text-pink-300 font-medium flex items-center justify-between border-t border-white/5 pt-3">
+            <span>Pink Bottle Magic</span>
+            <i class="fa-solid fa-sparkles"></i>
+          </div>
+        </div>
+
+        <!-- CARD 2: NIGHT VIBES & MUSIC -->
+        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden group flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="text-[10px] uppercase font-bold tracking-widest text-pink-400 bg-pink-500/10 px-2.5 py-1 rounded-md border border-pink-500/20">Aesthetic</span>
+            <h3 class="text-xl font-bold text-white">Night & Beats</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Атмосфера ночного города, Drake & voskresenskii в наушниках на максимум.</p>
+          </div>
+
+          <div class="my-6 h-40 rounded-2xl overflow-hidden relative border border-white/5">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" alt="Night Vibe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 right-3 flex justify-between items-center text-xs text-white">
+              <span class="font-semibold"><i class="fa-solid fa-moon text-pink-400 mr-1"></i> Late Night</span>
+              <span class="text-[10px] text-pink-300">100% Vibe</span>
+            </div>
+          </div>
+
+          <div class="text-[11px] text-pink-300 font-medium flex items-center justify-between border-t border-white/5 pt-3">
+            <span>Janice STFU & Франсе</span>
+            <i class="fa-solid fa-compact-disc text-pink-400 animate-spin" style="animation-duration: 8s;"></i>
+          </div>
+        </div>
+
+        <!-- CARD 3: DARK MINIMAL & PINK ACCENTS -->
+        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden group flex flex-col justify-between">
+          <div class="space-y-2">
+            <span class="text-[10px] uppercase font-bold tracking-widest text-pink-400 bg-pink-500/10 px-2.5 py-1 rounded-md border border-pink-500/20">Style</span>
+            <h3 class="text-xl font-bold text-white">Dark & Pink Glow</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Минималистичный глубокий чёрный стиль с яркими неново-розовыми акцентами.</p>
+          </div>
+
+          <div class="my-6 h-40 rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-4 border border-white/5 flex flex-col justify-center items-center relative overflow-hidden">
+            <div class="w-20 h-20 rounded-full bg-pink-500/20 filter blur-xl absolute"></div>
+            <span class="text-3xl font-serif italic text-pink-400 relative z-10 font-bold tracking-wider">Sabina</span>
+            <span class="text-[10px] text-gray-500 uppercase tracking-widest mt-1 relative z-10">Pure Aesthetic</span>
+          </div>
+
+          <div class="text-[11px] text-pink-300 font-medium flex items-center justify-between border-t border-white/5 pt-3">
+            <span>Minimal Elegance</span>
+            <i class="fa-solid fa-heart text-pink-500"></i>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: HER SOUNDTRACKS (MUSIC PLAYER) -->
+    <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 border border-pink-500/20 shadow-2xl relative">
+      
+      <!-- Section Header with Mode Tabs -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/5 pb-4">
+        <div>
+          <span class="text-xs font-semibold tracking-widest uppercase text-pink-400 flex items-center gap-2">
+            <span id="eq-visualizer" class="flex items-end h-4">
+              <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
+            </span>
+            Audio Player
+          </span>
+          <h2 class="text-2xl font-bold text-white mt-1">Her Soundtracks 🎵</h2>
+        </div>
+
+        <!-- Mode Switcher -->
+        <div class="flex bg-zinc-950 p-1 rounded-xl border border-white/10 text-xs font-medium">
+          <button id="tab-btn-local" onclick="switchMusicTab('local')" class="px-3 py-1.5 rounded-lg transition-all bg-pink-600 text-white shadow-sm">
+            <i class="fa-solid fa-play mr-1.5"></i> MP3 Плеер
+          </button>
+          <button id="tab-btn-youtube" onclick="switchMusicTab('youtube')" class="px-3 py-1.5 rounded-lg transition-all text-gray-400 hover:text-white">
+            <i class="fa-brands fa-youtube mr-1.5 text-red-500"></i> YouTube Видео
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 1: LOCAL / CUSTOM MP3 PLAYER -->
+      <div id="tab-content-local" class="space-y-6">
+        
+        <!-- Player UI Card -->
+        <div class="flex flex-col md:flex-row items-center gap-6 bg-zinc-950/80 p-5 rounded-2xl border border-white/5">
+          
+          <!-- Album Cover -->
+          <div class="relative flex-shrink-0 group">
+            <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden shadow-2xl border border-pink-500/20 relative">
+              <img id="track-cover" src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80" alt="Cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <button onclick="toggleAudioPlay()" class="absolute -bottom-2 -right-2 w-11 h-11 bg-pink-600 hover:bg-pink-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all">
+              <i id="big-play-icon" class="fa-solid fa-play ml-0.5"></i>
+            </button>
+          </div>
+
+          <!-- Info & Controls -->
+          <div class="flex-1 w-full space-y-3 text-center md:text-left">
+            <div>
+              <h3 id="track-title" class="text-xl font-bold text-white">Janice STFU</h3>
+              <p id="track-artist" class="text-xs text-pink-400 mt-0.5">Drake</p>
+            </div>
+
+            <!-- Seek Bar -->
+            <div class="space-y-1">
+              <input type="range" id="audio-seek" value="0" min="0" max="100" class="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-pink-500">
+              <div class="flex justify-between text-[11px] text-gray-500 font-mono">
+                <span id="time-current">0:00</span>
+                <span id="time-duration">0:00</span>
+              </div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="flex items-center justify-center md:justify-start gap-5 pt-1">
+              <button onclick="prevTrack()" class="text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-backward-step text-lg"></i></button>
+              <button onclick="toggleAudioPlay()" class="w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-all">
+                <i id="small-play-icon" class="fa-solid fa-play ml-0.5"></i>
+              </button>
+              <button onclick="nextTrack()" class="text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-forward-step text-lg"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tracklist & MP3 Drag and Drop Uploader -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-medium text-gray-400">Треки в плейлисте:</span>
+            
+            <!-- Upload Custom File Button -->
+            <label for="mp3-file-input" class="text-xs bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 font-medium px-3 py-1.5 rounded-lg border border-pink-500/30 cursor-pointer transition-all flex items-center gap-1.5">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Загрузить оригинальные MP3
+              <input type="file" id="mp3-file-input" accept="audio/*" multiple class="hidden" onchange="handleMp3Upload(event)">
+            </label>
+          </div>
+
+          <div id="playlist-container" class="space-y-2">
+            <!-- Playlist Items JS Render -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TAB 2: EMBEDDED YOUTUBE PLAYERS (Guaranteed Audio/Video) -->
+      <div id="tab-content-youtube" class="hidden space-y-6">
+        <p class="text-xs text-gray-400">Оригинальные треки в плеере YouTube:</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Drake - Janice STFU -->
+          <div class="bg-zinc-950 p-3 rounded-2xl border border-white/5 space-y-2">
+            <p class="text-xs font-semibold text-pink-400 flex items-center gap-1.5">
+              <i class="fa-brands fa-youtube text-red-500"></i> Drake — Janice STFU
+            </p>
+            <div class="aspect-video w-full rounded-xl overflow-hidden bg-black">
+              <iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/mKBOGV3l1xU" title="Drake - Janice STFU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <!-- voskresenskii - Франсе -->
+          <div class="bg-zinc-950 p-3 rounded-2xl border border-white/5 space-y-2">
+            <p class="text-xs font-semibold text-pink-400 flex items-center gap-1.5">
+              <i class="fa-brands fa-youtube text-red-500"></i> voskresenskii — Франсе
+            </p>
+            <div class="aspect-video w-full rounded-xl overflow-hidden bg-black">
+              <iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/64bRPShYymM" title="voskresenskii - Франсе" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 3: PHOTO GALLERY GRID -->
+    <section class="space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/5 pb-4">
+        <div>
+          <span class="text-xs font-semibold tracking-widest uppercase text-pink-400">Photo Moments</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-0.5">Галерея Кадров 📸</h2>
+        </div>
+
+        <label for="photo-input" class="glass-card hover:bg-white/10 text-xs text-pink-300 font-medium py-2 px-4 rounded-xl border border-pink-500/30 cursor-pointer flex items-center gap-2 transition-all">
+          <i class="fa-solid fa-plus text-pink-400"></i> Добавить фото
+          <input type="file" id="photo-input" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)">
+        </label>
+      </div>
+
+      <!-- Photo Grid -->
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <!-- Default Aesthetic Cards -->
+        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80', 'Aesthetic Moments ✨')">
+          <div class="h-64 overflow-hidden relative">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <p class="text-xs text-pink-200">Aesthetic Moments ✨</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80', 'Pure Vibe & Style 💖')">
+          <div class="h-64 overflow-hidden relative">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <p class="text-xs text-pink-200">Pure Vibe & Style 💖</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80', 'Night Vibes 🌙')">
+          <div class="h-64 overflow-hidden relative">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <p class="text-xs text-pink-200">Night Vibes 🌙</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-8 text-xs text-gray-500 relative z-10 border-t border-white/5 mt-16">
+    <p class="font-light">Created with ❤️ for Sabina • Aesthetic Concept Page</p>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center p-4 backdrop-blur-md">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-pink-500 transition-colors">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img id="lightbox-img" src="" alt="Enlarged Photo" class="max-w-full max-h-[80vh] rounded-2xl shadow-2xl object-contain border border-pink-500/20">
+    <p id="lightbox-caption" class="text-gray-300 text-sm mt-4 text-center max-w-md font-light"></p>
+  </div>
+
+  <!-- Hidden HTML5 Audio Element -->
+  <audio id="main-audio"></audio>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- 1. SABINA VIBE GENERATOR ---
+    const vibes = [
+      "«Late night drives, Drake on repeat & Burberry Her trail ✨»",
+      "«Розовый Burberry Her, эстетика тёмных тонов и любимые биты 💖»",
+      "«voskresenskii - Франсе в наушниках & идеальный ночной вайб 🌙»",
+      "«Pure aesthetic, bad bitch energy & soft heart ✨»",
+      "«Drake - Janice STFU на повторе & особенная атмосфера 🎵»",
+      "«Шлейф Burberry Pink, закат и эстетичные кадры 💕»"
+    ];
+
+    function generateVibe() {
+      const quoteEl = document.getElementById('vibe-quote');
+      quoteEl.style.opacity = '0';
+      
+      setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * vibes.length);
+        quoteEl.textContent = vibes[randomIndex];
+        quoteEl.style.opacity = '1';
+      }, 300);
+    }
+
+    // --- 2. MUSIC PLAYLIST MANAGEMENT ---
+    let defaultPlaylist = [
+      {
+        id: 'track-1',
+        title: "Janice STFU",
+        artist: "Drake",
+        src: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3",
+        cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80",
+        isCustom: false
+      },
+      {
+        id: 'track-2',
+        title: "Франсе",
+        artist: "voskresenskii",
+        src: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=smooth-waters-115977.mp3",
+        cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
+        isCustom: false
+      }
+    ];
+
+    let currentTrackIndex = 0;
+    let isPlaying = false;
+    const audio = document.getElementById('main-audio');
+
+    function initPlaylist() {
+      renderPlaylist();
+      loadTrack(0);
+    }
+
+    function renderPlaylist() {
+      const container = document.getElementById('playlist-container');
+      container.innerHTML = '';
+
+      defaultPlaylist.forEach((track, index) => {
+        const isActive = index === currentTrackIndex;
+        const item = document.createElement('div');
+        item.className = `flex items-center justify-between p-3 rounded-xl cursor-pointer transition-all border ${
+          isActive ? 'bg-pink-500/15 border-pink-500/40' : 'bg-zinc-950 border-white/5 hover:bg-white/5'
+        }`;
+        item.onclick = () => { selectTrack(index); };
+
+        item.innerHTML = `
+          <div class="flex items-center gap-3 overflow-hidden">
+            <div class="w-8 h-8 rounded-lg bg-zinc-900 flex items-center justify-center text-xs font-bold ${isActive ? 'text-pink-400' : 'text-gray-500'} flex-shrink-0">
+              ${index + 1}
+            </div>
+            <div class="truncate">
+              <p class="text-xs font-semibold text-white truncate">${track.title}</p>
+              <p class="text-[11px] text-gray-400 truncate">${track.artist} ${track.isCustom ? '• (Свой MP3)' : ''}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            ${isActive && isPlaying ? '<span class="text-[11px] text-pink-400 font-medium animate-pulse">Играет</span>' : ''}
+            <i class="fa-solid fa-heart ${isActive ? 'text-pink-500' : 'text-gray-700'} text-xs"></i>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function loadTrack(index) {
+      currentTrackIndex = index;
+      const track = defaultPlaylist[index];
+      audio.src = track.src;
+      document.getElementById('track-title').textContent = track.title;
+      document.getElementById('track-artist').textContent = track.artist;
+      document.getElementById('track-cover').src = track.cover;
+      renderPlaylist();
+    }
+
+    function toggleAudioPlay() {
+      if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+        updatePlayIcons(false);
+      } else {
+        audio.play().then(() => {
+          isPlaying = true;
+          updatePlayIcons(true);
+        }).catch(e => console.log('Playback error:', e));
+      }
+      renderPlaylist();
+    }
+
+    function updatePlayIcons(playing) {
+      const bigIcon = document.getElementById('big-play-icon');
+      const smallIcon = document.getElementById('small-play-icon');
+      const eq = document.getElementById('eq-visualizer');
+
+      if (playing) {
+        bigIcon.className = 'fa-solid fa-pause';
+        smallIcon.className = 'fa-solid fa-pause';
+        eq.classList.add('playing');
+      } else {
+        bigIcon.className = 'fa-solid fa-play ml-0.5';
+        smallIcon.className = 'fa-solid fa-play ml-0.5';
+        eq.classList.remove('playing');
+      }
+    }
+
+    function selectTrack(index) {
+      loadTrack(index);
+      toggleAudioPlay();
+    }
+
+    function prevTrack() {
+      let idx = (currentTrackIndex - 1 + defaultPlaylist.length) % defaultPlaylist.length;
+      loadTrack(idx);
+      if (isPlaying) audio.play();
+    }
+
+    function nextTrack() {
+      let idx = (currentTrackIndex + 1) % defaultPlaylist.length;
+      loadTrack(idx);
+      if (isPlaying) audio.play();
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        document.getElementById('audio-seek').value = progress;
+        document.getElementById('time-current').textContent = formatTime(audio.currentTime);
+        document.getElementById('time-duration').textContent = formatTime(audio.duration);
+      }
+    });
+
+    document.getElementById('audio-seek').addEventListener('input', (e) => {
+      if (audio.duration) {
+        audio.currentTime = (e.target.value / 100) * audio.duration;
+      }
+    });
+
+    audio.addEventListener('ended', () => { nextTrack(); });
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function handleMp3Upload(event) {
+      const files = event.target.files;
+      if (!files || files.length === 0) return;
+
+      Array.from(files).forEach((file, idx) => {
+        const fileUrl = URL.createObjectURL(file);
+        const newTrack = {
+          id: 'custom-' + Date.now() + '-' + idx,
+          title: file.name.replace(/\.[^/.]+$/, ""),
+          artist: "Свой трек",
+          src: fileUrl,
+          cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80",
+          isCustom: true
+        };
+        defaultPlaylist.push(newTrack);
+      });
+
+      loadTrack(defaultPlaylist.length - files.length);
+      toggleAudioPlay();
+    }
+
+    function switchMusicTab(tab) {
+      const localTab = document.getElementById('tab-content-local');
+      const ytTab = document.getElementById('tab-content-youtube');
+      const localBtn = document.getElementById('tab-btn-local');
+      const ytBtn = document.getElementById('tab-btn-youtube');
+
+      if (tab === 'local') {
+        localTab.classList.remove('hidden');
+        ytTab.classList.add('hidden');
+        localBtn.className = 'px-3 py-1.5 rounded-lg transition-all bg-pink-600 text-white shadow-sm';
+        ytBtn.className = 'px-3 py-1.5 rounded-lg transition-all text-gray-400 hover:text-white';
+      } else {
+        localTab.classList.add('hidden');
+        ytTab.classList.remove('hidden');
+        ytBtn.className = 'px-3 py-1.5 rounded-lg transition-all bg-pink-600 text-white shadow-sm';
+        localBtn.className = 'px-3 py-1.5 rounded-lg transition-all text-gray-400 hover:text-white';
+        if (isPlaying) toggleAudioPlay();
+      }
+    }
+
+    // --- 3. PHOTO GALLERY & LIGHTBOX ---
+    function handlePhotoUpload(event) {
+      const files = event.target.files;
+      if (!files) return;
+
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          addPhotoToGallery(e.target.result, 'New Moment ✨');
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function addPhotoToGallery(src, caption) {
+      const grid = document.getElementById('gallery-grid');
+      const card = document.createElement('div');
+      card.className = "glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer";
+      card.onclick = () => openLightbox(src, caption);
+      card.innerHTML = `
+        <div class="h-64 overflow-hidden relative">
+          <img src="${src}" alt="Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+            <p class="text-xs text-pink-200">${caption}</p>
+          </div>
+        </div>
+      `;
+      grid.prepend(card);
+    }
+
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption;
+      const lb = document.getElementById('lightbox');
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+    }
+
+    // --- 4. CLICK SPARKLE / HEART PARTICLES ---
+    document.addEventListener('click', function(e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+
+      const sparkle = document.createElement('div');
+      sparkle.className = 'click-sparkle text-pink-500 text-base';
+      sparkle.style.left = `${e.clientX}px`;
+      sparkle.style.top = `${e.clientY}px`;
+      sparkle.innerHTML = '<i class="fa-solid fa-sparkles"></i>';
+
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
+    });
+
+    // Initialize App
+    initPlaylist();
+  </script>
+</body>
+</html>
