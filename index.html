@@ -1,687 +1,747 @@
 <!DOCTYPE html>
 <html lang="ru" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sabina's World ✨</title>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              dark: '#0a0a0c',
-              card: '#121218',
-              border: 'rgba(255, 42, 133, 0.15)',
-              pink: '#ff2a85',
-              purple: '#d946ef',
-              glow: 'rgba(255, 42, 133, 0.3)'
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sabina // Наша История</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        romantic: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                        }
+                    }
+                }
             }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            serif: ['Playfair Display', 'serif']
-          }
+        };
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0709;
+            color: #f1f5f9;
+            overflow-x: hidden;
         }
-      }
-    }
-  </script>
-
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    body {
-      background-color: #0a0a0c;
-      color: #f3f4f6;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* Ambient Pink Glows */
-    .glow-effect {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 42, 117, 0.22) 0%, rgba(217, 70, 239, 0.05) 50%, rgba(0, 0, 0, 0) 70%);
-      filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Glassmorphism Cards */
-    .glass-card {
-      background: rgba(18, 18, 24, 0.78);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 42, 117, 0.18);
-    }
-
-    .glass-card-hover {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .glass-card-hover:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255, 42, 117, 0.45);
-      box-shadow: 0 12px 35px -10px rgba(255, 42, 117, 0.35);
-    }
-
-    /* Equalizer Sound Waves */
-    .eq-bar {
-      width: 3px;
-      height: 6px;
-      background-color: #ff2d75;
-      border-radius: 2px;
-      margin: 0 1.5px;
-      transition: height 0.15s ease;
-    }
-
-    .playing .eq-bar {
-      animation: eqAnimation 1.2s infinite ease-in-out alternate;
-    }
-
-    .playing .eq-bar:nth-child(1) { animation-duration: 0.5s; }
-    .playing .eq-bar:nth-child(2) { animation-duration: 0.8s; }
-    .playing .eq-bar:nth-child(3) { animation-duration: 1.1s; }
-    .playing .eq-bar:nth-child(4) { animation-duration: 0.7s; }
-    .playing .eq-bar:nth-child(5) { animation-duration: 1.0s; }
-
-    @keyframes eqAnimation {
-      0% { height: 4px; opacity: 0.3; }
-      100% { height: 22px; opacity: 1; }
-    }
-
-    /* Click Particle Sparkles */
-    .click-sparkle {
-      position: fixed;
-      pointer-events: none;
-      animation: floatSparkle 1s ease-out forwards;
-      z-index: 9999;
-    }
-
-    @keyframes floatSparkle {
-      0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -90px) scale(1.4) rotate(45deg);
-      }
-    }
-
-    /* Glowing Text Effect */
-    .pink-glow-text {
-      text-shadow: 0 0 25px rgba(255, 42, 117, 0.7);
-    }
-
-    /* Custom Input Range */
-    input[type="range"]::-webkit-slider-thumb {
-      background: #ff2d75;
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0a0a0c;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1e1e28;
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #ff2d75;
-    }
-  </style>
+        .font-serif-romantic {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .glass-romantic {
+            background: rgba(22, 13, 19, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(244, 114, 182, 0.15);
+        }
+        .card-inner {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .card-flipped {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
+        }
+        .animate-heart-pulse {
+            animation: heartPulse 2.5s infinite ease-in-out;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0px) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
+        .click-heart {
+            position: fixed;
+            pointer-events: none;
+            animation: floatUp 1.2s ease-out forwards;
+            z-index: 9999;
+        }
+    </style>
 </head>
-<body class="relative min-h-screen flex flex-col justify-between selection:bg-pink-500 selection:text-white">
+<body class="min-h-screen relative selection:bg-rose-500 selection:text-white">
 
-  <!-- Background Glowing Orbs -->
-  <div class="glow-effect w-[600px] h-[600px] -top-40 -left-40"></div>
-  <div class="glow-effect w-[700px] h-[700px] top-[35%] -right-48"></div>
-  <div class="glow-effect w-[500px] h-[500px] bottom-10 left-[20%]"></div>
+    <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
-  <!-- MAIN CONTAINER -->
-  <div class="relative z-10 max-w-5xl mx-auto px-4 py-10 sm:px-6 lg:px-8 space-y-16">
-
-    <!-- HERO HEADER: CONCEPTUAL CONCEPT BOARD -->
-    <header class="text-center space-y-6 pt-6">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-pink-500/30 text-pink-400 text-xs sm:text-sm font-semibold tracking-wider uppercase shadow-lg">
-        <i class="fa-solid fa-sparkles text-pink-400 animate-pulse"></i>
-        <span>Aesthetic & Association Space</span>
-      </div>
-
-      <h1 class="text-6xl sm:text-8xl font-black tracking-tight">
-        SABINA'S <span class="bg-gradient-to-r from-pink-500 via-fuchsia-400 to-rose-500 bg-clip-text text-transparent font-serif italic pink-glow-text">WORLD</span>
-      </h1>
-
-      <p class="text-gray-400 max-w-md mx-auto text-sm sm:text-base leading-relaxed font-light tracking-wide">
-        Персональная эстетика Сабины: оригинальная музыка, ваши фото и любимые ассоциации.
-      </p>
-
-      <!-- RANDOM VIBE GENERATOR BUTTON -->
-      <div class="pt-2">
-        <button onclick="generateVibe()" class="group relative inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-600 to-fuchsia-600 text-white font-semibold text-sm shadow-xl shadow-pink-600/20 hover:shadow-pink-600/40 hover:scale-105 transition-all active:scale-95">
-          <i class="fa-solid fa-wand-magic-sparkles text-pink-200 group-hover:rotate-12 transition-transform"></i>
-          <span id="vibe-btn-text">Сгенерировать вайб Сабины</span>
-        </button>
-        <!-- Vibe Display Box -->
-        <div id="vibe-quote-box" class="mt-4 min-h-[48px] flex items-center justify-center">
-          <p id="vibe-quote" class="text-sm italic text-pink-300 font-serif tracking-wide opacity-0 transition-opacity duration-500">
-            «Drake на повторе, розовый Burberry Her & наши самые яркие моменты ✨»
-          </p>
-        </div>
-      </div>
-    </header>
-
-    <!-- SECTION 1: VISUAL ASSOCIATIONS (VIBE BOARD) -->
-    <section class="space-y-6">
-      <div class="flex items-center justify-between border-b border-white/5 pb-4">
-        <div>
-          <span class="text-xs font-semibold tracking-widest uppercase text-pink-400">Concept Grid</span>
-          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-0.5">Vibe Board & Ассоциации</h2>
-        </div>
-        <i class="fa-solid fa-border-all text-pink-500/50 text-xl"></i>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-12 space-y-8">
         
-        <!-- CARD 1: BURBERRY HER PERFUME (PINK) -->
-        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden group flex flex-col justify-between md:col-span-1">
-          <div class="absolute -right-8 -top-8 w-32 h-32 bg-pink-500/10 rounded-full blur-2xl group-hover:bg-pink-500/25 transition-all"></div>
-          
-          <div class="space-y-2 relative z-10">
-            <span class="text-[10px] uppercase font-bold tracking-widest text-pink-400 bg-pink-500/10 px-2.5 py-1 rounded-md border border-pink-500/20">Her Fragrance</span>
-            <h3 class="text-xl font-bold text-white">Burberry Pink</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">Любимый розовый флакон Burberry Her — нежный и эстетичный шлейф.</p>
-          </div>
-
-          <!-- Perfume Image -->
-          <div class="my-6 relative flex justify-center items-center h-52">
-            <div class="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-            <img 
-              src="https://assets.burberry.com/is/image/Burberryltd/79BE0E1B-4467-4659-96D0-ECECE8356792?$BBY_V3_SL_1$&wid=1501&hei=1500" 
-              alt="Burberry Her Pink Perfume" 
-              class="max-h-48 object-contain drop-shadow-[0_10px_20px_rgba(255,42,117,0.35)] group-hover:scale-110 transition-transform duration-500 relative z-10"
-              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80';"
-            >
-          </div>
-
-          <div class="text-[11px] text-pink-300 font-medium flex items-center justify-between border-t border-white/5 pt-3">
-            <span>Pink Bottle Magic</span>
-            <i class="fa-solid fa-sparkles"></i>
-          </div>
-        </div>
-
-        <!-- CARD 2: NIGHT VIBES & MUSIC -->
-        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden group flex flex-col justify-between">
-          <div class="space-y-2">
-            <span class="text-[10px] uppercase font-bold tracking-widest text-pink-400 bg-pink-500/10 px-2.5 py-1 rounded-md border border-pink-500/20">Aesthetic</span>
-            <h3 class="text-xl font-bold text-white">Night Soundtracks</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">Drake & voskresenskii — главный саундтрек её атмосферы.</p>
-          </div>
-
-          <div class="my-6 h-40 rounded-2xl overflow-hidden relative border border-white/5">
-            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" alt="Night Vibe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-            <div class="absolute bottom-3 left-3 right-3 flex justify-between items-center text-xs text-white">
-              <span class="font-semibold"><i class="fa-solid fa-moon text-pink-400 mr-1"></i> Late Night</span>
-              <span class="text-[10px] text-pink-300">100% Vibe</span>
+        <!-- HEADER -->
+        <header class="text-center space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-romantic border border-rose-500/30 text-rose-300 text-xs font-medium tracking-wide">
+                <span id="syncIndicator" class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                <span id="syncStatusText">Подключение к синхронизации...</span>
             </div>
-          </div>
-
-          <div class="text-[11px] text-pink-300 font-medium flex items-center justify-between border-t border-white/5 pt-3">
-            <span>Drake & voskresenskii</span>
-            <i class="fa-solid fa-compact-disc text-pink-400 animate-spin" style="animation-duration: 8s;"></i>
-          </div>
-        </div>
-
-        <!-- CARD 3: DARK MINIMAL & PINK ACCENTS -->
-        <div class="glass-card glass-card-hover rounded-3xl p-6 relative overflow-hidden group flex flex-col justify-between">
-          <div class="space-y-2">
-            <span class="text-[10px] uppercase font-bold tracking-widest text-pink-400 bg-pink-500/10 px-2.5 py-1 rounded-md border border-pink-500/20">Style</span>
-            <h3 class="text-xl font-bold text-white">Dark & Pink Glow</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">Тёмный стильный минимализм с ярким неново-розовым свечением.</p>
-          </div>
-
-          <div class="my-6 h-40 rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-4 border border-white/5 flex flex-col justify-center items-center relative overflow-hidden">
-            <div class="w-20 h-20 rounded-full bg-pink-500/20 filter blur-xl absolute"></div>
-            <span class="text-3xl font-serif italic text-pink-400 relative z-10 font-bold tracking-wider">Sabina</span>
-            <span class="text-[10px] text-gray-500 uppercase tracking-widest mt-1 relative z-10">Pure Style</span>
-          </div>
-
-          <div class="text-[11px] text-pink-300 font-medium flex items-center justify-between border-t border-white/5 pt-3">
-            <span>Minimal Elegance</span>
-            <i class="fa-solid fa-heart text-pink-500"></i>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 2: HER SOUNDTRACKS (MUSIC PLAYER WITH ORIGINAL TRACKS) -->
-    <section class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 border border-pink-500/20 shadow-2xl relative">
-      
-      <div class="flex items-center justify-between border-b border-white/5 pb-4">
-        <div>
-          <span class="text-xs font-semibold tracking-widest uppercase text-pink-400 flex items-center gap-2">
-            <span id="eq-visualizer" class="flex items-end h-4">
-              <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
-            </span>
-            Original Audio Player
-          </span>
-          <h2 class="text-2xl font-bold text-white mt-1">Her Soundtracks 🎵</h2>
-        </div>
-
-        <button onclick="toggleAudioPlay()" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-medium text-xs shadow-lg shadow-pink-600/30 transition-all flex items-center gap-2">
-          <i id="header-play-btn-icon" class="fa-solid fa-play"></i>
-          <span id="header-play-btn-text">Нажать Play</span>
-        </button>
-      </div>
-
-      <!-- Player Main UI Card -->
-      <div class="flex flex-col md:flex-row items-center gap-6 bg-zinc-950/90 p-5 rounded-2xl border border-white/5">
-        
-        <!-- Album Cover -->
-        <div class="relative flex-shrink-0 group">
-          <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden shadow-2xl border border-pink-500/20 relative">
-            <img id="track-cover" src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80" alt="Cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          </div>
-          <button onclick="toggleAudioPlay()" class="absolute -bottom-2 -right-2 w-11 h-11 bg-pink-600 hover:bg-pink-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all">
-            <i id="big-play-icon" class="fa-solid fa-play ml-0.5"></i>
-          </button>
-        </div>
-
-        <!-- Info & Controls -->
-        <div class="flex-1 w-full space-y-3 text-center md:text-left">
-          <div>
-            <h3 id="track-title" class="text-xl font-bold text-white">Drake - Janice STFU / Needs Me</h3>
-            <p id="track-artist" class="text-xs text-pink-400 mt-0.5">Оригинальный трек Drake</p>
-          </div>
-
-          <!-- Seek Bar -->
-          <div class="space-y-1">
-            <input type="range" id="audio-seek" value="0" min="0" max="100" class="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-pink-500">
-            <div class="flex justify-between text-[11px] text-gray-500 font-mono">
-              <span id="time-current">0:00</span>
-              <span id="time-duration">0:00</span>
+            <h1 class="text-4xl sm:text-6xl font-serif-romantic tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-rose-200 via-pink-300 to-rose-400 italic">
+                Для Сабины
+            </h1>
+            <p class="text-xs sm:text-sm text-rose-200/60 max-w-md mx-auto">
+                Ваша общая живая эстетическая история. Загружай фото и музыку, и они мгновенно появятся у неё.
+            </p>
+            <div class="pt-1 flex items-center justify-center gap-2">
+                <span class="text-[10px] text-rose-300/40 font-mono">Ваш код синхронизации:</span>
+                <button onclick="copySyncCode()" class="px-2 py-0.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/20 text-[11px] font-mono transition flex items-center gap-1.5">
+                    <span id="syncCodeDisplay">Загрузка...</span>
+                    <i class="fa-solid fa-copy text-[10px]"></i>
+                </button>
             </div>
-          </div>
+        </header>
 
-          <!-- Control Buttons -->
-          <div class="flex items-center justify-center md:justify-start gap-5 pt-1">
-            <button onclick="prevTrack()" class="text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-backward-step text-lg"></i></button>
-            <button onclick="toggleAudioPlay()" class="w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-all">
-              <i id="small-play-icon" class="fa-solid fa-play ml-0.5"></i>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- COMPLIMENT GENERATOR -->
+            <div class="glass-romantic rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6 relative overflow-hidden group">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex justify-between items-center text-xs text-rose-300/60 uppercase tracking-widest font-mono">
+                    <span id="complimentIndex">Заметка #1</span>
+                    <i class="fa-solid fa-sparkles text-rose-400"></i>
+                </div>
+                <p id="complimentText" class="text-lg sm:text-xl text-rose-100 font-serif-romantic italic leading-relaxed transition-opacity duration-300">
+                    "Ты умеешь сочетать невероятный стиль, сильный характер и самую тёплую улыбку."
+                </p>
+                <div class="flex items-center justify-between pt-2">
+                    <div id="complimentDots" class="flex gap-1.5"></div>
+                    <button onclick="nextCompliment()" class="px-4 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-500/30 transition text-xs flex items-center gap-2">
+                        <span>Следующая</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FLIP ROMANTIC CARD -->
+            <div class="h-64 sm:h-auto min-h-[220px] relative cursor-pointer group perspective" onclick="flipCard()">
+                <div id="romanticCardInner" class="card-inner w-full h-full relative rounded-3xl">
+                    <!-- FRONT -->
+                    <div class="card-front absolute inset-0 glass-romantic rounded-3xl p-6 flex flex-col justify-between border border-rose-500/20">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-rose-300/60 font-mono uppercase">Таинственная карточка</span>
+                            <i class="fa-solid fa-heart text-rose-400 animate-heart-pulse"></i>
+                        </div>
+                        <div class="text-center space-y-2">
+                            <i class="fa-solid fa-envelope-open-text text-3xl text-rose-300/80"></i>
+                            <p class="text-sm text-rose-200">Нажми, чтобы перевернуть</p>
+                        </div>
+                        <div class="text-right text-[10px] text-rose-400/50 font-mono">нажмите, чтобы открыть</div>
+                    </div>
+                    <!-- BACK -->
+                    <div class="card-back absolute inset-0 glass-romantic rounded-3xl p-6 flex flex-col justify-between border border-rose-400/40 bg-rose-950/40">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-rose-300 font-mono">Secret Note</span>
+                            <i class="fa-solid fa-star text-amber-300"></i>
+                        </div>
+                        <p class="text-center font-serif-romantic text-base sm:text-lg text-rose-100 italic">
+                            «Твой безупречный стиль, улыбка и невероятный вайб — ты лучшее вдохновение каждый день.»
+                        </p>
+                        <div class="text-center text-xs text-rose-300/70 font-mono">❤️ для Сабины</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="glass-romantic rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-serif-romantic text-rose-100 flex items-center gap-2">
+                        <i class="fa-solid fa-camera-retro text-rose-400 text-lg"></i>
+                        <span>Галерея Сабины</span>
+                    </h2>
+                    <p class="text-xs text-rose-200/50">Загружай фотографии — они сразу появятся у неё в галерее</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <label class="px-4 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-500/30 transition text-xs cursor-pointer flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up text-rose-400"></i>
+                        <span>Загрузить фото</span>
+                        <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
+                    </label>
+                </div>
+            </div>
+
+            <!-- GALLERY GRID -->
+            <div id="photoGalleryGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="col-span-full text-center py-8 text-xs text-rose-300/40 font-mono">
+                    Загрузка онлайн-галереи...
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-romantic rounded-3xl p-6 sm:p-8 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-serif-romantic text-rose-100 flex items-center gap-2">
+                        <i class="fa-solid fa-compact-disc text-rose-400 text-lg animate-spin-slow"></i>
+                        <span>Общий Саундтрек</span>
+                    </h2>
+                    <p class="text-xs text-rose-200/50">Песни синхронизируются онлайн в реальном времени</p>
+                </div>
+                <label class="px-4 py-2 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-500/30 transition text-xs cursor-pointer flex items-center gap-2 self-start sm:self-auto">
+                    <i class="fa-solid fa-music text-rose-400"></i>
+                    <span>Загрузить песню</span>
+                    <input type="file" id="songInput" accept="audio/*" class="hidden" onchange="handleSongUpload(event)">
+                </label>
+            </div>
+
+            <!-- SONG LIST -->
+            <div id="songList" class="space-y-3">
+                <div class="text-center py-6 text-xs text-rose-300/40 font-mono">
+                    Загрузка музыки...
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-romantic rounded-3xl p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleAmbientBeat()" class="px-4 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-200 border border-rose-500/20 transition text-xs flex items-center gap-2">
+                        <span id="pulseRing" class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+                        <span id="ambientText">Атмосфера: Вкл</span>
+                    </button>
+                    <button onclick="triggerRoseRain()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white transition text-xs shadow-lg shadow-rose-500/20 hover:scale-105 active:scale-95 flex items-center gap-2">
+                        <i class="fa-solid fa-gift"></i>
+                        <span>Сюрприз</span>
+                    </button>
+                </div>
+
+                <button onclick="promptJoinPair()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-rose-200 text-xs border border-white/10 transition flex items-center gap-1.5" title="Подключиться к коду синхронизации Сабины">
+                    <i class="fa-solid fa-link text-rose-400"></i>
+                    <span>Ввести код пары</span>
+                </button>
+            </div>
+        </section>
+
+        <footer class="text-center py-4 text-xs text-rose-300/40 font-mono">
+            Crafted with love for Sabina ❤️ Synchronized Online Vibe Archive
+        </footer>
+    </div>
+
+    <!-- PHOTO FULLSCREEN MODAL -->
+    <div id="photoModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closePhotoModal()">
+        <div class="relative max-w-3xl max-h-[90vh] rounded-2xl overflow-hidden border border-rose-500/30" onclick="event.stopPropagation()">
+            <img id="modalImg" src="" alt="" class="w-full h-full object-contain max-h-[80vh]">
+            <div class="p-4 bg-black/60 backdrop-blur-md flex justify-between items-center">
+                <span id="modalCaption" class="text-sm font-serif-romantic text-rose-200"></span>
+                <button onclick="closePhotoModal()" class="text-rose-300 hover:text-white px-3 py-1 rounded-lg bg-rose-500/20 text-xs">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SURPRISE MODAL -->
+    <div id="surpriseModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-romantic rounded-3xl p-8 max-w-md text-center space-y-6 border border-rose-400/40 transform scale-90 transition-transform duration-300">
+            <div class="w-16 h-16 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center mx-auto text-2xl border border-rose-500/30">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-serif-romantic text-rose-100">Для Сабины</h3>
+                <p class="text-sm text-rose-200/80 leading-relaxed">
+                    Пусть каждый твой день наполняется красивой музыкой, лёгкостью и самыми яркими эмоциями. Ты вдохновляешь!
+                </p>
+            </div>
+            <button onclick="closeSurpriseModal()" class="px-6 py-2.5 rounded-xl bg-rose-500 text-white text-xs font-medium hover:bg-rose-600 transition shadow-lg shadow-rose-500/30">
+                Спасибо ❤️
             </button>
-            <button onclick="nextTrack()" class="text-gray-400 hover:text-white transition-colors"><i class="fa-solid fa-forward-step text-lg"></i></button>
-          </div>
         </div>
-      </div>
+    </div>
 
-      <!-- Tracklist -->
-      <div class="space-y-3">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-medium text-gray-400">Оригинальные аудиозаписи:</span>
-          
-          <label for="mp3-file-input" class="text-xs bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 font-medium px-3 py-1.5 rounded-lg border border-pink-500/30 cursor-pointer transition-all flex items-center gap-1.5">
-            <i class="fa-solid fa-plus"></i> Добавить свой MP3
-            <input type="file" id="mp3-file-input" accept="audio/*" multiple class="hidden" onchange="handleMp3Upload(event)">
-          </label>
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-romantic px-4 py-3 rounded-2xl border border-rose-400/30 text-rose-200 text-xs flex items-center gap-3 shadow-xl">
+            <i class="fa-solid fa-circle-check text-rose-400"></i>
+            <span id="toastMsg">Успешно!</span>
         </div>
+    </div>
 
-        <div id="playlist-container" class="space-y-2">
-          <!-- Rendered in JS -->
-        </div>
-      </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    </section>
+        // APP PARAMS & FIREBASE SETUP
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'sabina-romantic-app';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "demo-key",
+            authDomain: "demo.firebaseapp.com",
+            projectId: "demo-project"
+        };
 
-    <!-- SECTION 3: YOUR PERSONAL PHOTO GALLERY -->
-    <section class="space-y-6">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/5 pb-4">
-        <div>
-          <span class="text-xs font-semibold tracking-widest uppercase text-pink-400">Personal Photos</span>
-          <h2 class="text-2xl sm:text-3xl font-bold text-white mt-0.5">Ваши Общие Фото 📸</h2>
-        </div>
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        <label for="photo-input" class="glass-card hover:bg-white/10 text-xs text-pink-300 font-medium py-2 px-4 rounded-xl border border-pink-500/30 cursor-pointer flex items-center gap-2 transition-all">
-          <i class="fa-solid fa-plus text-pink-400"></i> Добавить ещё фото
-          <input type="file" id="photo-input" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)">
-        </label>
-      </div>
+        let currentUser = null;
+        let pairId = "sabina_love_pair"; // Default unique pair channel
 
-      <!-- Photo Grid displaying user's real uploaded photos -->
-      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        
-        <!-- Photo 1 -->
-        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer" onclick="openLightbox('image_ff7ea8.jpg', 'Улыбки & Искренность ✨')">
-          <div class="h-80 overflow-hidden relative">
-            <img src="image_ff7ea8.jpg" alt="Sabina Photo 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-              <p class="text-xs text-pink-200 font-medium">Улыбки & Искренность ✨</p>
-            </div>
-          </div>
-        </div>
+        // Get custom pair code from URL if provided
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('pair')) {
+            pairId = urlParams.get('pair');
+        }
 
-        <!-- Photo 2 -->
-        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer" onclick="openLightbox('image_ff814e.jpg', 'Вместе и рядом 💖')">
-          <div class="h-80 overflow-hidden relative">
-            <img src="image_ff814e.jpg" alt="Sabina Photo 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-              <p class="text-xs text-pink-200 font-medium">Вместе и рядом 💖</p>
-            </div>
-          </div>
-        </div>
+        window.pairId = pairId;
 
-        <!-- Photo 3 -->
-        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer" onclick="openLightbox('image_ff8152.jpg', 'Mirror Selfie Style 🖤')">
-          <div class="h-80 overflow-hidden relative">
-            <img src="image_ff8152.jpg" alt="Sabina Photo 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-              <p class="text-xs text-pink-200 font-medium">Mirror Selfie Style 🖤</p>
-            </div>
-          </div>
-        </div>
+        // AUTHENTICATION & SUBSCRIPTIONS
+        async function initAuthAndSync() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    const res = await signInWithCustomToken(auth, __initial_auth_token);
+                    currentUser = res.user;
+                } else {
+                    const res = await signInAnonymously(auth);
+                    currentUser = res.user;
+                }
 
-        <!-- Photo 4 -->
-        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer" onclick="openLightbox('image_ff816e.jpg', 'С любимой серьезкой 💕')">
-          <div class="h-80 overflow-hidden relative">
-            <img src="image_ff816e.jpg" alt="Sabina Photo 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-              <p class="text-xs text-pink-200 font-medium">С любимой серьезкой 💕</p>
-            </div>
-          </div>
-        </div>
+                document.getElementById('syncIndicator').className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
+                document.getElementById('syncStatusText').textContent = "Онлайн синхронизация активна";
+                document.getElementById('syncCodeDisplay').textContent = pairId;
 
-      </div>
-    </section>
+                subscribeToCloudData();
+            } catch (err) {
+                console.error("Auth error:", err);
+                document.getElementById('syncIndicator').className = "w-2 h-2 rounded-full bg-rose-500";
+                document.getElementById('syncStatusText').textContent = "Ошибка подключения к облаку";
+            }
+        }
 
-  </div>
+        function subscribeToCloudData() {
+            if (!currentUser) return;
 
-  <!-- FOOTER -->
-  <footer class="text-center py-8 text-xs text-gray-500 relative z-10 border-t border-white/5 mt-16">
-    <p class="font-light">Created for Sabina • Aesthetic Space</p>
-  </footer>
+            // Subscribe to photos collection
+            const photosCol = collection(db, 'artifacts', appId, 'public', 'data', `photos_${pairId}`);
+            onSnapshot(photosCol, (snapshot) => {
+                const photos = [];
+                snapshot.forEach(doc => photos.push(doc.data()));
+                renderCloudPhotos(photos);
+            }, (error) => console.error("Photos sync error:", error));
 
-  <!-- LIGHTBOX MODAL -->
-  <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center p-4 backdrop-blur-md" onclick="closeLightbox()">
-    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-pink-500 transition-colors">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-    <img id="lightbox-img" src="" alt="Enlarged Photo" class="max-w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain border border-pink-500/30">
-    <p id="lightbox-caption" class="text-gray-300 text-sm mt-4 text-center max-w-md font-light"></p>
-  </div>
+            // Subscribe to songs collection
+            const songsCol = collection(db, 'artifacts', appId, 'public', 'data', `songs_${pairId}`);
+            onSnapshot(songsCol, (snapshot) => {
+                const songs = [];
+                snapshot.forEach(doc => songs.push(doc.data()));
+                renderCloudSongs(songs);
+            }, (error) => console.error("Songs sync error:", error));
+        }
 
-  <!-- Hidden HTML5 Audio Element -->
-  <audio id="main-audio"></audio>
+        // PHOTO CLOUD ACTIONS
+        window.handlePhotoUpload = async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
 
-  <!-- JAVASCRIPT LOGIC -->
-  <script>
-    // --- 1. SABINA VIBE GENERATOR ---
-    const vibes = [
-      "«Drake на повторе, ночной город и неповторимый вайб ✨»",
-      "«Розовый Burberry Her, эстетика тёмных тонов и любимая музыка 💖»",
-      "«voskresenskii - Франсе в наушниках & особенная атмосфера 🌙»",
-      "«Pure aesthetic, bad bitch energy & soft heart ✨»",
-      "«С любимой серьёзкой — самые лучшие кадры 💕»",
-      "«Шлейф Burberry Pink, ночные поездки и вдохновение ✨»"
-    ];
+            if (file.size > 800000) { // Limit for inline cloud strings
+                showToast("Выбери фото меньшего размера (до 800 КБ)");
+                return;
+            }
 
-    function generateVibe() {
-      const quoteEl = document.getElementById('vibe-quote');
-      quoteEl.style.opacity = '0';
-      
-      setTimeout(() => {
-        const randomIndex = Math.floor(Math.random() * vibes.length);
-        quoteEl.textContent = vibes[randomIndex];
-        quoteEl.style.opacity = '1';
-      }, 300);
-    }
+            const reader = new FileReader();
+            reader.onload = async function(evt) {
+                const photoId = 'photo_' + Date.now();
+                const photoData = {
+                    id: photoId,
+                    name: file.name.replace(/\.[^/.]+$/, ""),
+                    url: evt.target.result,
+                    createdAt: Date.now()
+                };
 
-    // --- 2. MUSIC PLAYLIST MANAGEMENT WITH USER'S SPECIFIC TRACKS ---
-    let defaultPlaylist = [
-      {
-        id: 'track-drake',
-        title: "Janice STFU / Needs Me",
-        artist: "Drake",
-        src: "Drake_-_Needs_Me_78000490.mp3",
-        cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80",
-        isCustom: false
-      },
-      {
-        id: 'track-voskresenskii',
-        title: "Франсе",
-        artist: "voskresenskii",
-        src: "voskresenskii_-_Franse_77817505.mp3",
-        cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-        isCustom: false
-      }
-    ];
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', `photos_${pairId}`, photoId);
+                    await setDoc(docRef, photoData);
+                    showToast("Фото мгновенно отправлено Сабине! 📸");
+                } catch (err) {
+                    showToast("Ошибка сохранения в облако");
+                }
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
+        };
 
-    let currentTrackIndex = 0;
-    let isPlaying = false;
-    const audio = document.getElementById('main-audio');
+        window.deletePhoto = async function(id) {
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', `photos_${pairId}`, id);
+                await deleteDoc(docRef);
+                showToast("Фото удалено из общей галереи");
+            } catch (err) {
+                showToast("Ошибка при удалении");
+            }
+        };
 
-    function initPlaylist() {
-      renderPlaylist();
-      loadTrack(0);
-    }
+        function renderCloudPhotos(photos) {
+            const container = document.getElementById('photoGalleryGrid');
+            
+            const defaultPhotos = [
+                { 
+                    id: 'def_aesthetic_rose', 
+                    name: 'Романтическая эстетика', 
+                    url: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?q=80&w=800&auto=format&fit=crop' 
+                },
+                { 
+                    id: 'def_sunset', 
+                    name: 'Закат & Вдохновение', 
+                    url: 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?q=80&w=800&auto=format&fit=crop' 
+                }
+            ];
 
-    function renderPlaylist() {
-      const container = document.getElementById('playlist-container');
-      container.innerHTML = '';
+            const allPhotos = [...defaultPhotos, ...photos.sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0))];
 
-      defaultPlaylist.forEach((track, index) => {
-        const isActive = index === currentTrackIndex;
-        const item = document.createElement('div');
-        item.className = `flex items-center justify-between p-3.5 rounded-xl cursor-pointer transition-all border ${
-          isActive ? 'bg-pink-500/15 border-pink-500/40 shadow-md' : 'bg-zinc-950 border-white/5 hover:bg-white/5'
-        }`;
-        item.onclick = () => { selectTrack(index); };
+            container.innerHTML = allPhotos.map(photo => `
+                <div class="relative group rounded-2xl overflow-hidden glass-romantic border border-rose-400/20 aspect-square cursor-pointer">
+                    <img src="${photo.url}" alt="${escapeHtml(photo.name)}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onclick="openPhotoModal('${photo.url}', '${escapeHtml(photo.name)}')">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-2.5 flex flex-col justify-between pointer-events-none">
+                        ${photo.id.startsWith('photo_') ? `
+                        <button onclick="event.stopPropagation(); deletePhoto('${photo.id}')" class="pointer-events-auto self-end w-7 h-7 rounded-full bg-black/60 text-rose-300 hover:text-white flex items-center justify-center text-xs">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        ` : `<div></div>`}
+                        <span class="text-[11px] text-rose-100 font-serif-romantic truncate">${escapeHtml(photo.name)}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-        item.innerHTML = `
-          <div class="flex items-center gap-3 overflow-hidden">
-            <div class="w-9 h-9 rounded-lg bg-zinc-900 flex items-center justify-center text-xs font-bold ${isActive ? 'text-pink-400 bg-pink-500/20' : 'text-gray-500'} flex-shrink-0">
-              ${index + 1}
-            </div>
-            <div class="truncate">
-              <p class="text-sm font-semibold text-white truncate">${track.title}</p>
-              <p class="text-xs text-pink-400/80 truncate">${track.artist} ${track.isCustom ? '• (Свой MP3)' : ''}</p>
-            </div>
-          </div>
-          <div class="flex items-center gap-3">
-            ${isActive && isPlaying ? '<span class="text-xs text-pink-400 font-medium animate-pulse">Playing</span>' : ''}
-            <i class="fa-solid fa-heart ${isActive ? 'text-pink-500' : 'text-gray-700'} text-xs"></i>
-          </div>
-        `;
-        container.appendChild(item);
-      });
-    }
+        // SONG CLOUD ACTIONS
+        window.handleSongUpload = async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
 
-    function loadTrack(index) {
-      currentTrackIndex = index;
-      const track = defaultPlaylist[index];
-      audio.src = track.src;
-      document.getElementById('track-title').textContent = track.title;
-      document.getElementById('track-artist').textContent = track.artist;
-      document.getElementById('track-cover').src = track.cover;
-      renderPlaylist();
-    }
+            if (file.size > 900000) {
+                showToast("Выбери аудиоклип меньшего размера (до 900 КБ)");
+                return;
+            }
 
-    function toggleAudioPlay() {
-      if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-        updatePlayIcons(false);
-      } else {
-        audio.play().then(() => {
-          isPlaying = true;
-          updatePlayIcons(true);
-        }).catch(e => {
-          console.log('Playback error:', e);
-          isPlaying = true;
-          updatePlayIcons(true);
+            const reader = new FileReader();
+            reader.onload = async function(evt) {
+                const songId = 'song_' + Date.now();
+                const songData = {
+                    id: songId,
+                    name: file.name.replace(/\.[^/.]+$/, ""),
+                    audioUrl: evt.target.result,
+                    createdAt: Date.now()
+                };
+
+                try {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', `songs_${pairId}`, songId);
+                    await setDoc(docRef, songData);
+                    showToast("Песня синхронизирована с Сабиной! 🎵");
+                } catch (err) {
+                    showToast("Ошибка синхронизации песни");
+                }
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
+        };
+
+        window.deleteSong = async function(id) {
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', `songs_${pairId}`, id);
+                await deleteDoc(docRef);
+                showToast("Песня удалена");
+            } catch (err) {
+                showToast("Ошибка при удалении");
+            }
+        };
+
+        let currentAudio = null;
+        let playingSongId = null;
+
+        function renderCloudSongs(songs) {
+            const container = document.getElementById('songList');
+            if (songs.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-6 text-xs text-rose-300/40 font-mono">
+                        Пока нет песен. Нажмите «Загрузить песню», и она сразу появится у вас обоих!
+                    </div>
+                `;
+                return;
+            }
+
+            songs.sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+            container.innerHTML = songs.map(song => `
+                <div class="glass-romantic rounded-2xl p-4 flex items-center justify-between border border-rose-500/20">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <button onclick="togglePlaySong('${song.id}', '${encodeURIComponent(song.audioUrl)}')" class="w-10 h-10 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 flex items-center justify-center transition flex-shrink-0">
+                            <i class="fa-solid ${playingSongId === song.id ? 'fa-pause' : 'fa-play'} text-sm"></i>
+                        </button>
+                        <div class="truncate">
+                            <p class="text-sm text-rose-100 font-medium truncate">${escapeHtml(song.name)}</p>
+                            <p class="text-[10px] text-rose-300/50 font-mono">Общая аудиозапись</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteSong('${song.id}')" class="text-rose-400/50 hover:text-rose-300 text-xs p-2">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        window.togglePlaySong = function(id, encodedUrl) {
+            const url = decodeURIComponent(encodedUrl);
+
+            if (playingSongId === id && currentAudio) {
+                if (currentAudio.paused) {
+                    currentAudio.play();
+                } else {
+                    currentAudio.pause();
+                    playingSongId = null;
+                }
+            } else {
+                if (currentAudio) {
+                    currentAudio.pause();
+                }
+                currentAudio = new Audio(url);
+                currentAudio.play();
+                playingSongId = id;
+                currentAudio.onended = () => {
+                    playingSongId = null;
+                };
+            }
+        };
+
+        // STARTUP
+        window.addEventListener('load', () => {
+            initAuthAndSync();
         });
-      }
-      renderPlaylist();
-    }
+    </script>
 
-    function updatePlayIcons(playing) {
-      const bigIcon = document.getElementById('big-play-icon');
-      const smallIcon = document.getElementById('small-play-icon');
-      const headerIcon = document.getElementById('header-play-btn-icon');
-      const headerText = document.getElementById('header-play-btn-text');
-      const eq = document.getElementById('eq-visualizer');
+    <script>
+        // COMPLIMENTS GENERATOR
+        const compliments = [
+            "Ты умеешь сочетать невероятный стиль, сильный характер и самую тёплую улыбку.",
+            "Рядом с тобой любой обычный день становится особенным и вдохновляющим.",
+            "Твой вкус в музыке и жизни — это отдельный вид искусства.",
+            "Сабина, твоя уверенность и эстетика не имеют аналогов.",
+            "Ты обладаешь особенной магией притягивать всё самое красивое."
+        ];
+        let currentCompliment = 0;
 
-      if (playing) {
-        bigIcon.className = 'fa-solid fa-pause';
-        smallIcon.className = 'fa-solid fa-pause';
-        headerIcon.className = 'fa-solid fa-pause';
-        headerText.textContent = 'Пауза';
-        eq.classList.add('playing');
-      } else {
-        bigIcon.className = 'fa-solid fa-play ml-0.5';
-        smallIcon.className = 'fa-solid fa-play ml-0.5';
-        headerIcon.className = 'fa-solid fa-play';
-        headerText.textContent = 'Нажать Play';
-        eq.classList.remove('playing');
-      }
-    }
+        function nextCompliment() {
+            const textEl = document.getElementById('complimentText');
+            const indexEl = document.getElementById('complimentIndex');
 
-    function selectTrack(index) {
-      loadTrack(index);
-      toggleAudioPlay();
-    }
+            textEl.style.opacity = '0';
+            setTimeout(() => {
+                currentCompliment = (currentCompliment + 1) % compliments.length;
+                textEl.textContent = `"${compliments[currentCompliment]}"`;
+                indexEl.textContent = `Заметка #${currentCompliment + 1}`;
+                renderComplimentsDot();
+                textEl.style.opacity = '1';
+            }, 300);
+        }
 
-    function prevTrack() {
-      let idx = (currentTrackIndex - 1 + defaultPlaylist.length) % defaultPlaylist.length;
-      loadTrack(idx);
-      if (isPlaying) audio.play();
-    }
+        function renderComplimentsDot() {
+            const dotsEl = document.getElementById('complimentDots');
+            dotsEl.innerHTML = compliments.map((_, i) => 
+                `<span class="w-2 h-2 rounded-full ${i === currentCompliment ? 'bg-rose-400' : 'bg-rose-900'}"></span>`
+            ).join('');
+        }
+        renderComplimentsDot();
 
-    function nextTrack() {
-      let idx = (currentTrackIndex + 1) % defaultPlaylist.length;
-      loadTrack(idx);
-      if (isPlaying) audio.play();
-    }
+        function flipCard() {
+            document.getElementById('romanticCardInner').classList.toggle('card-flipped');
+        }
 
-    audio.addEventListener('timeupdate', () => {
-      if (audio.duration) {
-        const progress = (audio.currentTime / audio.duration) * 100;
-        document.getElementById('audio-seek').value = progress;
-        document.getElementById('time-current').textContent = formatTime(audio.currentTime);
-        document.getElementById('time-duration').textContent = formatTime(audio.duration);
-      }
-    });
+        // AMBIENT PULSE
+        let ambientActive = true;
+        function toggleAmbientBeat() {
+            ambientActive = !ambientActive;
+            const text = document.getElementById('ambientText');
+            const ring = document.getElementById('pulseRing');
 
-    document.getElementById('audio-seek').addEventListener('input', (e) => {
-      if (audio.duration) {
-        audio.currentTime = (e.target.value / 100) * audio.duration;
-      }
-    });
+            if (ambientActive) {
+                text.textContent = "Атмосфера: Вкл";
+                ring.style.display = "inline-flex";
+                showToast("Атмосфера включена");
+            } else {
+                text.textContent = "Атмосфера: Выкл";
+                ring.style.display = "none";
+                showToast("Атмосфера выключена");
+            }
+        }
 
-    audio.addEventListener('ended', () => { nextTrack(); });
+        // SURPRISE MODAL
+        function triggerRoseRain() {
+            const modal = document.getElementById('surpriseModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.children[0].classList.remove('scale-90');
+            modal.children[0].classList.add('scale-100');
 
-    function formatTime(seconds) {
-      const m = Math.floor(seconds / 60);
-      const s = Math.floor(seconds % 60);
-      return `${m}:${s < 10 ? '0' : ''}${s}`;
-    }
+            for (let i = 0; i < 30; i++) {
+                setTimeout(createPetalParticle, i * 80);
+            }
+        }
 
-    function handleMp3Upload(event) {
-      const files = event.target.files;
-      if (!files || files.length === 0) return;
+        function closeSurpriseModal() {
+            const modal = document.getElementById('surpriseModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.children[0].classList.remove('scale-100');
+            modal.children[0].classList.add('scale-90');
+        }
 
-      Array.from(files).forEach((file, idx) => {
-        const fileUrl = URL.createObjectURL(file);
-        const newTrack = {
-          id: 'custom-' + Date.now() + '-' + idx,
-          title: file.name.replace(/\.[^/.]+$/, ""),
-          artist: "Свой трек",
-          src: fileUrl,
-          cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80",
-          isCustom: true
-        };
-        defaultPlaylist.push(newTrack);
-      });
+        function openPhotoModal(url, caption) {
+            document.getElementById('modalImg').src = url;
+            document.getElementById('modalCaption').textContent = caption;
+            const modal = document.getElementById('photoModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+        }
 
-      loadTrack(defaultPlaylist.length - files.length);
-      toggleAudioPlay();
-    }
+        function closePhotoModal() {
+            const modal = document.getElementById('photoModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
 
-    // --- 3. PHOTO GALLERY & LIGHTBOX ---
-    function handlePhotoUpload(event) {
-      const files = event.target.files;
-      if (!files) return;
+        function copySyncCode() {
+            const code = window.pairId || 'sabina_love_pair';
+            const tempInput = document.createElement('input');
+            tempInput.value = code;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast("Код пары скопирован! Отправь его Сабине ❤️");
+        }
 
-      Array.from(files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          addPhotoToGallery(e.target.result, 'Новый момент ✨');
-        };
-        reader.readAsDataURL(file);
-      });
-    }
+        function promptJoinPair() {
+            const newCode = prompt("Введи уникальный код пары, который тебе отправили:");
+            if (newCode && newCode.trim().length > 0) {
+                const currentUrl = new URL(window.location.href);
+                currentUrl.searchParams.set('pair', newCode.trim());
+                window.location.href = currentUrl.toString();
+            }
+        }
 
-    function addPhotoToGallery(src, caption) {
-      const grid = document.getElementById('gallery-grid');
-      const card = document.createElement('div');
-      card.className = "glass-card glass-card-hover rounded-2xl overflow-hidden group cursor-pointer";
-      card.onclick = () => openLightbox(src, caption);
-      card.innerHTML = `
-        <div class="h-80 overflow-hidden relative">
-          <img src="${src}" alt="Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-            <p class="text-xs text-pink-200 font-medium">${caption}</p>
-          </div>
-        </div>
-      `;
-      grid.prepend(card);
-    }
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
 
-    function openLightbox(src, caption) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox-caption').textContent = caption;
-      const lb = document.getElementById('lightbox');
-      lb.classList.remove('hidden');
-      lb.classList.add('flex');
-    }
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
 
-    function closeLightbox() {
-      const lb = document.getElementById('lightbox');
-      lb.classList.add('hidden');
-      lb.classList.remove('flex');
-    }
+        // TOUCH TAP HEART EFFECTS
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('button') || e.target.closest('label') || e.target.closest('.cursor-pointer')) return;
 
-    // --- 4. CLICK SPARKLE / HEART PARTICLES ---
-    document.addEventListener('click', function(e) {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+            const heart = document.createElement('div');
+            heart.className = 'click-heart text-rose-400 text-xl';
+            heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            document.body.appendChild(heart);
 
-      const sparkle = document.createElement('div');
-      sparkle.className = 'click-sparkle text-pink-500 text-base';
-      sparkle.style.left = `${e.clientX}px`;
-      sparkle.style.top = `${e.clientY}px`;
-      sparkle.innerHTML = '<i class="fa-solid fa-sparkles"></i>';
+            setTimeout(() => heart.remove(), 1200);
+        });
 
-      document.body.appendChild(sparkle);
+        // CANVAS PARTICLES
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
 
-      setTimeout(() => {
-        sparkle.remove();
-      }, 1000);
-    });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-    // Initialize App
-    initPlaylist();
-  </script>
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + 20;
+                this.size = Math.random() * 10 + 5;
+                this.speedY = Math.random() * 1.2 + 0.4;
+                this.speedX = Math.random() * 0.8 - 0.4;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = Math.random() * 2 - 1;
+                this.isHeart = Math.random() > 0.4;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotSpeed;
+                if (this.y < -20) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.globalAlpha = this.opacity;
+
+                if (this.isHeart) {
+                    ctx.fillStyle = '#f472b6';
+                    ctx.beginPath();
+                    const topCurveHeight = this.size * 0.3;
+                    ctx.moveTo(0, topCurveHeight);
+                    ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+                    ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
+                    ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+                    ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = '#fda4af';
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, this.size / 2, this.size / 3, Math.PI / 4, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function createPetalParticle() {
+            const p = new Particle();
+            p.y = Math.random() * canvas.height;
+            p.opacity = 0.8;
+            particles.push(p);
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 35; i++) {
+                const p = new Particle();
+                p.y = Math.random() * canvas.height;
+                particles.push(p);
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
 </body>
 </html>
